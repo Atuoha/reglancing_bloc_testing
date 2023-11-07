@@ -7,8 +7,9 @@ class CounterEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class IncrementCounter extends CounterEvent {
 
-}
+class CounterStarted extends CounterEvent {}
+
+class IncrementCounter extends CounterEvent {}
 
 class DecrementCounter extends CounterEvent {}

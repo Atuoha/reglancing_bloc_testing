@@ -1,7 +1,8 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../constants/enums/counter_status.dart';
+import '../../models/counter.dart';
 
 part 'counter_event.dart';
 
@@ -13,12 +14,44 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
       // TODO: implement event handler
     });
 
-    on<IncrementCounter>((event, emit) {
-      emit(state.copyWith(value: state.value + 1));
-    });
+    on<CounterStarted>(_counterState);
 
-    on<DecrementCounter>((event, emit) {
-      emit(state.copyWith(value: state.value == 0 ? 0 : state.value - 1));
-    });
+    on<IncrementCounter>(_incrementCounter);
+
+    on<DecrementCounter>(_decrementCounter);
+  }
+
+  void _counterState(CounterStarted event, Emitter<CounterState> emit) {
+    if (state.counter.status == CounterStatus.success) return;
+
+    emit(
+      state.copyWith(
+        counter: Counter(
+          status: CounterStatus.success,
+        ),
+      ),
+    );
+  }
+
+  void _incrementCounter(IncrementCounter event, Emitter<CounterState> emit) {
+    var count = state.counter.counter;
+    emit(
+      state.copyWith(
+        counter: Counter(
+          counter: count + 1,
+        ),
+      ),
+    );
+  }
+
+  void _decrementCounter(DecrementCounter event, Emitter<CounterState> emit) {
+    var count = state.counter.counter;
+    emit(
+      state.copyWith(
+        counter: Counter(
+          counter: count == 0 ? 0 : count - 1,
+        ),
+      ),
+    );
   }
 }

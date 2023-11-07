@@ -1,20 +1,22 @@
 part of 'counter_bloc.dart';
 
 class CounterState extends Equatable {
-  final int value;
-  const CounterState({required this.value});
+  final Counter counter;
 
-  factory CounterState.initial()=>const CounterState(value: 0);
+  const CounterState({required this.counter});
+
+  factory CounterState.initial() => CounterState(
+        counter: Counter.initial(),
+      );
 
   @override
-  List<Object> get props => [value];
+  List<Object> get props => [counter];
 
   CounterState copyWith({
-    int? value,
+    Counter? counter,
   }) {
     return CounterState(
-      value: value ?? this.value,
+      counter: counter ?? this.counter,
     );
   }
 }
-
