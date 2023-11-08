@@ -26,6 +26,19 @@ void main() {
       test('test that the props are the same', () {
         expect(createSubject().props, equals(<Object?>[Counter()]));
       });
+
+      test('test that the status changes', () {
+        expect(
+          createSubject().copyWith(
+            counter: Counter(
+              status: CounterStatus.success,
+            ),
+          ),
+          CounterState(
+            counter: Counter(status: CounterStatus.success),
+          ),
+        );
+      });
     });
   });
 }
