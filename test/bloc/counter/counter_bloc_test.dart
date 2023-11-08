@@ -67,6 +67,28 @@ void main() {
         ],
       );
 
+
+      blocTest(
+        'Test CounterIncrement and if it increments counter and emits a state when clicked twice',
+        build: () => CounterBloc(),
+        act: (bloc) => bloc
+          ..add(IncrementCounter())
+          ..add(IncrementCounter()),
+        expect: () => [
+          CounterState(
+            counter: Counter(
+              counter: mockCounter + 1,
+            ),
+          ),
+
+          CounterState(
+            counter: Counter(
+              counter: mockCounter + 2,
+            ),
+          ),
+        ],
+      );
+
       blocTest(
         'Test CounterDecrement and if it decrements counter '
         'and emits a state when value is above 0 and stays the same when the value is 0',
