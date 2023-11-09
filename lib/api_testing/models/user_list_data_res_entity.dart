@@ -16,10 +16,14 @@ class UserListDataResponseEntity {
     };
   }
 
-  factory UserListDataResponseEntity.fromJson(Map<String, dynamic> json) {
+  factory UserListDataResponseEntity.fromJson(
+      List<Map<String, dynamic>> jsonList) {
+    final List<User> users =
+        jsonList.map((userJson) => User.fromJson(userJson)).toList();
+
     return UserListDataResponseEntity(
-      users: json['users'] as List<User>,
-      status: json['status'] as bool,
+      users: users,
+      status: users.isNotEmpty,
     );
   }
 }

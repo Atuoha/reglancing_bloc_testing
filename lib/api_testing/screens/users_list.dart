@@ -1,13 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:re_glance_bloc_testing/api_testing/business_logic/user_bloc/user_bloc.dart';
 import 'package:re_glance_bloc_testing/api_testing/screens/user_details.dart';
 
 import '../constants/string.dart';
 import '../models/user.dart';
-import '../widgets/rich_text.dart';
 
-class UsersList extends StatelessWidget {
+class UsersList extends StatefulWidget {
   const UsersList({super.key});
+
+  @override
+  State<UsersList> createState() => _UsersListState();
+}
+
+class _UsersListState extends State<UsersList> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserBloc>().add(RetrieveAllUsers());
+  }
 
   @override
   Widget build(BuildContext context) {
