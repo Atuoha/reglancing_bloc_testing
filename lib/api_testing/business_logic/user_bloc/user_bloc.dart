@@ -4,7 +4,9 @@ import 'package:equatable/equatable.dart';
 import 'package:re_glance_bloc_testing/api_testing/constants/enum/processing_status.dart';
 import '../../models/user.dart';
 import '../../repository/user_repo.dart';
+
 part 'user_event.dart';
+
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -25,6 +27,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(state.copyWith(status: ProcessingStatus.waiting));
 
     final List<User>? users = await userRepository.retrieveUsers();
+    print('BLOC users: $users');
     try {
       emit(state.copyWith(
         users: users,

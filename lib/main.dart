@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
           ),
           // home: const CounterApp(),
           home: const UsersList(),
+          builder: EasyLoading.init(),
         ),
       ),
     );

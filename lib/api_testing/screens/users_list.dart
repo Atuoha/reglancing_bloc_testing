@@ -1,11 +1,14 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:re_glance_bloc_testing/api_testing/business_logic/user_bloc/user_bloc.dart';
+import 'package:re_glance_bloc_testing/api_testing/constants/enum/processing_status.dart';
 import 'package:re_glance_bloc_testing/api_testing/screens/user_details.dart';
+import 'package:re_glance_bloc_testing/api_testing/widgets/single_user_grid.dart';
 
-import '../constants/string.dart';
 import '../models/user.dart';
+import '../widgets/k_cool_alert.dart';
+import '../widgets/user_empty_widget.dart';
 
 class UsersList extends StatefulWidget {
   const UsersList({super.key});
@@ -29,104 +32,46 @@ class _UsersListState extends State<UsersList> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
-        child: GridView.count(
-          // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          //   crossAxisCount: 2,
-          //   mainAxisExtent: 10,
-          //   crossAxisSpacing: 10,
-          // ),
-          crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          children: List.generate(
-            50,
-            (index) => GestureDetector(
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => UserDetails(
-                    user: User.initial(),
-                  ),
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        color: Colors.grey.withOpacity(0.4),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage:
-                                  AssetImage(AppStringConstants.imgUrl),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              'John Doe',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              ),
-                            ),
-                            Text(
-                              'johndoe@gmail.com',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w200,
-                                fontSize: 10,
-                              ),
-                            ),
-                          ],
-                        ),
+        child: BlocConsumer<UserBloc, UserState>(
+          listener: (context, state) {
+            if (state.status == ProcessingStatus.error) {
+              kCoolAlert(
+                message: 'Error occurred!',
+                context: context,
+                alert: CoolAlertType.error,
+              );
+            }
+          },
+          builder: (context, state) {
+            return state.users.isEmpty
+                ? const UserEmptyWidget()
+                : SizedBox(
+                    height: MediaQuery.sizeOf(context).height / 1,
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 15,
                       ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              color: Colors.red,
-                              width: double.infinity,
-                              child: const Icon(
-                                CupertinoIcons.phone,
-                                color: Colors.white,
+                      itemCount: context.watch<UserBloc>().state.users.length,
+                      itemBuilder: (context, index) {
+                        User user =
+                            context.watch<UserBloc>().state.users[index];
+                        return GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => UserDetails(
+                                user: user,
                               ),
                             ),
                           ),
-                          Expanded(
-                            child: Container(
-                              color: Colors.brown,
-                              width: double.infinity,
-                              child: const Icon(
-                                CupertinoIcons.location,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Colors.green,
-                              width: double.infinity,
-                              child: const Icon(
-                                CupertinoIcons.envelope,
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                          child: SingleUserGrid(user: user),
+                        );
+                      },
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+                  );
+          },
         ),
       ),
     );

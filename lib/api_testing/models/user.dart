@@ -35,7 +35,6 @@ class User extends Equatable {
         company: Company.initial(),
       );
 
-
   User copyWith({
     int? id,
     String? name,
@@ -73,14 +72,14 @@ class User extends Equatable {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      username: json['username'] as String,
-      email: json['email'] as String,
-      address: json['address'] as Address,
-      phone: json['phone'] as String,
-      website: json['website'] as String,
-      company: json['company'] as Company,
+      id: json['id'],
+      name: json['name'],
+      username: json['username'],
+      email: json['email'],
+      address: Address.fromJson(json['address']),
+      phone: json['phone'],
+      website: json['website'],
+      company: Company.fromJson(json['company']),
     );
   }
 
@@ -100,5 +99,4 @@ class User extends Equatable {
   String toString() {
     return 'User{id: $id, name: $name, username: $username, email: $email, address: $address, phone: $phone, website: $website, company: $company}';
   }
-
 }

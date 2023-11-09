@@ -71,7 +71,7 @@ class Address extends Equatable {
       suite: json['suite'] as String,
       city: json['city'] as String,
       zipcode: json['zipcode'] as String,
-      geo: json['geo'] as Geo,
+      geo: Geo.fromJson(json['geo']) ,
     );
   }
 }

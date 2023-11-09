@@ -17,9 +17,17 @@ class UserDetailResponseEntity {
   }
 
   factory UserDetailResponseEntity.fromJson(Map<String, dynamic> json) {
-    return UserDetailResponseEntity(
-      user: json['user'] as User,
-      status: json['status'] as bool,
-    );
+    if (json.isNotEmpty) {
+      final User user = User.fromJson(json);
+      return UserDetailResponseEntity(
+        user: user,
+        status: true, // Set status to true because user data is present
+      );
+    } else {
+      return UserDetailResponseEntity(
+        user: User.initial(), // Provide a default user object or handle it as needed
+        status: false, // Set status to false because there is no user data
+      );
+    }
   }
 }

@@ -17,7 +17,7 @@ class UserListDataResponseEntity {
   }
 
   factory UserListDataResponseEntity.fromJson(
-      List<Map<String, dynamic>> jsonList) {
+      List<dynamic> jsonList) {
     final List<User> users =
         jsonList.map((userJson) => User.fromJson(userJson)).toList();
 

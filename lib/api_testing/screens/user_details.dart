@@ -25,7 +25,7 @@ class UserDetails extends StatelessWidget {
             children: [
               const CircleAvatar(
                 radius: 60,
-                backgroundImage: AssetImage(AppStringConstants.imgUrl),
+                backgroundImage: AssetImage(AppStringConstants.avatarImg),
               ),
               const SizedBox(height: 10),
               RichTextWidget(title: 'Full name', data: user.name),
