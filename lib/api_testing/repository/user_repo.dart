@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:re_glance_bloc_testing/api_testing/api/user_api.dart';
 import 'package:re_glance_bloc_testing/api_testing/widgets/toast.dart';
@@ -14,17 +15,25 @@ class UserRepository {
     try {
       EasyLoading.show();
       var result = await userServiceAPI.fetchAllUsers();
-      EasyLoading.dismiss();
 
       if (result.status) {
-        print('Users: ${result.users}');
+        EasyLoading.dismiss();
+        if (kDebugMode) {
+          print('Users: ${result.users}');
+        }
         return result.users;
       } else {
         toastInfo(msg: 'Error retrieving users', status: Status.error);
         throw Exception('Error retrieving users');
       }
     } catch (e) {
-      toastInfo(msg: 'An error occurred: $e', status: Status.error);
+      EasyLoading.dismiss();
+      toastInfo(
+          msg: 'Ops! An error occurred! Check your internet connection',
+          status: Status.error);
+      if (kDebugMode) {
+        print('An error occurred: $e');
+      }
       rethrow;
     }
   }
@@ -33,17 +42,27 @@ class UserRepository {
     try {
       EasyLoading.show();
       var result = await userServiceAPI.fetchAUser(id: id);
-      EasyLoading.dismiss();
 
       if (result.status) {
-        print('User: ${result.user}');
+        EasyLoading.dismiss();
+        if (kDebugMode) {
+          print('User: ${result.user}');
+        }
         return result.user;
       } else {
         toastInfo(msg: 'Error retrieving user', status: Status.error);
         throw Exception('Error retrieving user');
       }
     } catch (e) {
-      toastInfo(msg: 'An error occurred: $e', status: Status.error);
+      EasyLoading.dismiss();
+      toastInfo(
+        msg: 'Ops! An error occurred! It\'s either '
+            'the user id is invalid or network glitch',
+        status: Status.error,
+      );
+      if (kDebugMode) {
+        print('An error occurred: $e');
+      }
       rethrow;
     }
   }
