@@ -25,13 +25,18 @@ class SingleUserGrid extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage(AppStringConstants.avatarImg),
+                  Hero(
+                    tag: user.id,
+                    child: const CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage(AppStringConstants.avatarImg),
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     user.name,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -40,6 +45,8 @@ class SingleUserGrid extends StatelessWidget {
                   ),
                   Text(
                     user.email,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w200,

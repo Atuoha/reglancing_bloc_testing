@@ -36,7 +36,7 @@ class UserRepository {
       EasyLoading.dismiss();
 
       if (result.status) {
-        print('Users: ${result.user}');
+        print('User: ${result.user}');
         return result.user;
       } else {
         toastInfo(msg: 'Error retrieving user', status: Status.error);

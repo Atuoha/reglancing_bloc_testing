@@ -10,7 +10,7 @@ class UserEvent extends Equatable {
 class RetrieveAllUsers extends UserEvent {}
 
 class RetrieveUser extends UserEvent {
-  final int id;
+  final int userId;
 
-  const RetrieveUser({required this.id});
+  const RetrieveUser({required this.userId});
 }

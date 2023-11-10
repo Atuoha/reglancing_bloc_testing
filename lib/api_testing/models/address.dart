@@ -18,10 +18,10 @@ class Address extends Equatable {
   });
 
   factory Address.initial() => Address(
-        street: "Lakers Street",
-        suite: "67 Jalami",
-        city: "Lagos",
-        zipcode: "400001",
+        street: "",
+        suite: "",
+        city: "",
+        zipcode: "",
         geo: Geo.initial(),
       );
 

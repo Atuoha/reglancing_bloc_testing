@@ -10,6 +10,7 @@ class UserDetails extends StatelessWidget {
     super.key,
     required this.user,
   });
+
   final User user;
 
   @override
@@ -23,9 +24,12 @@ class UserDetails extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const CircleAvatar(
-                radius: 60,
-                backgroundImage: AssetImage(AppStringConstants.avatarImg),
+              Hero(
+                tag: user.id,
+                child: const CircleAvatar(
+                  radius: 60,
+                  backgroundImage: AssetImage(AppStringConstants.avatarImg),
+                ),
               ),
               const SizedBox(height: 10),
               RichTextWidget(title: 'Full name', data: user.name),

@@ -42,7 +42,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Future<void> retrieveUser(RetrieveUser event, Emitter<UserState> emit) async {
     emit(state.copyWith(status: ProcessingStatus.waiting));
-    final User? user = await userRepository.retrieveUser(id: event.id);
+    final User? user = await userRepository.retrieveUser(id: event.userId);
     try {
       emit(state.copyWith(
         user: user,

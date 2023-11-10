@@ -12,9 +12,9 @@ class Company extends Equatable {
   });
 
   factory Company.initial() => const Company(
-        name: "Demo Banks",
-        catchPhrase: "...banks for the rich",
-        bs: "All in",
+        name: "",
+        catchPhrase: "",
+        bs: "",
       );
 
   @override

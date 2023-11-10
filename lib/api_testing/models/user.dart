@@ -26,12 +26,12 @@ class User extends Equatable {
 
   factory User.initial() => User(
         id: 0,
-        name: "John Doe",
-        username: "J Doe",
-        email: "johndoe@gmail.com",
+        name: "",
+        username: "",
+        email: "",
         address: Address.initial(),
-        phone: "000000000",
-        website: "www.johndoe.com",
+        phone: "",
+        website: "",
         company: Company.initial(),
       );
 

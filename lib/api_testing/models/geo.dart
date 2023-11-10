@@ -9,7 +9,7 @@ class Geo extends Equatable {
     required this.lng,
   });
 
-  factory Geo.initial() => const Geo(lat: "000", lng: "000");
+  factory Geo.initial() => const Geo(lat: "", lng: "");
 
   @override
   List<Object?> get props => [lat, lng];
