@@ -5,6 +5,7 @@ import '../models/user_list_data_res_entity.dart';
 import '../utils/http_util.dart';
 
 class UserServiceAPI {
+
    Future<UserListDataResponseEntity> fetchAllUsers() async {
     var response = await HttpUtil().get('users');
     if (kDebugMode) {

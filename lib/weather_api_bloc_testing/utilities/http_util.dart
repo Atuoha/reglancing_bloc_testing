@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:re_glance_bloc_testing/api_testing/constants/string.dart';
+import 'package:re_glance_bloc_testing/weather_api_bloc_testing/constants/constants.dart';
 
 class HttpUtil {
   static final HttpUtil _instance = HttpUtil._internal();
@@ -9,7 +9,7 @@ class HttpUtil {
 
   HttpUtil._internal() {
     BaseOptions options = BaseOptions(
-      baseUrl: AppStringConstants.serverAPIURL,
+      baseUrl: AppConstants.serverAPIURL,
       connectTimeout: const Duration(seconds: 15),
       receiveTimeout: const Duration(seconds: 15),
       responseType: ResponseType.json,
@@ -21,11 +21,11 @@ class HttpUtil {
 
   // post
   Future post(
-    String path, {
-    dynamic data,
-    Map<String, dynamic>? queryParameter,
-    Map<String, dynamic>? headers,
-  }) async {
+      String path, {
+        dynamic data,
+        Map<String, dynamic>? queryParameter,
+        Map<String, dynamic>? headers,
+      }) async {
     var response = await dio.post(
       path,
       data: data,
@@ -37,10 +37,10 @@ class HttpUtil {
 
   // get
   Future get(
-    String path, {
-    Map<String, dynamic>? queryParameter,
-    Map<String, dynamic>? headers,
-  }) async {
+      String path, {
+        Map<String, dynamic>? queryParameter,
+        Map<String, dynamic>? headers,
+      }) async {
     var response = await dio.get(
       path,
       queryParameters: queryParameter,

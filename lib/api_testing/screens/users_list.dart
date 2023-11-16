@@ -1,7 +1,5 @@
-import 'dart:async';
 
 import 'package:cool_alert/cool_alert.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:re_glance_bloc_testing/api_testing/business_logic/user_bloc/user_bloc.dart';
@@ -14,6 +12,7 @@ import '../constants/enum/status.dart';
 import '../models/user.dart';
 import '../widgets/k_cool_alert.dart';
 import '../widgets/user_empty_widget.dart';
+import '../widgets/user_section_box.dart';
 
 class UsersList extends StatefulWidget {
   const UsersList({super.key});
@@ -58,54 +57,9 @@ class _UsersListState extends State<UsersList> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFormField(
-                keyboardType: TextInputType.number,
-                key: const Key('text_id'),
-                controller: textIdController,
-                validator: (value) {
-                  if (value!.isEmpty || value.length < 3) {
-                    return "User ID can not be empty";
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(
-                    CupertinoIcons.number,
-                    color: Colors.grey,
-                  ),
-                  suffix: textIdController.text.isNotEmpty
-                      ? GestureDetector(
-                          onTap: () => fetchUser(),
-                          child: const Icon(
-                            CupertinoIcons.search,
-                            color: Colors.grey,
-                          ),
-                        )
-                      : const SizedBox.shrink(),
-                  hintText: 'Enter user id',
-                  label: const Text('User ID'),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                      width: 0.6,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                      width: 0.6,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                      width: 0.6,
-                    ),
-                  ),
-                ),
+              UserSearchBox(
+                textKeyword: textIdController,
+                fetchUserFnc: fetchUser,
               ),
               const SizedBox(height: 10),
               BlocConsumer<UserBloc, UserState>(

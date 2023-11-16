@@ -11,26 +11,28 @@ class UserRepository {
 
   UserRepository({required this.userServiceAPI});
 
+  // retrieve users
   Future<List<User>?> retrieveUsers() async {
     try {
-      EasyLoading.show();
+      EasyLoading.show(); // comment during testing
       var result = await userServiceAPI.fetchAllUsers();
 
       if (result.status) {
-        EasyLoading.dismiss();
+        EasyLoading.dismiss();  // comment during testing
         if (kDebugMode) {
           print('Users: ${result.users}');
         }
         return result.users;
       } else {
-        toastInfo(msg: 'Error retrieving users', status: Status.error);
+        toastInfo(msg: 'Error retrieving users', status: Status.error);  // comment during testing
         throw Exception('Error retrieving users');
       }
     } catch (e) {
-      EasyLoading.dismiss();
+      EasyLoading.dismiss();  // comment during testing
       toastInfo(
-          msg: 'Ops! An error occurred! Check your internet connection',
-          status: Status.error);
+        msg: 'Ops! An error occurred! Check your internet connection',   // comment during testing
+        status: Status.error,
+      );
       if (kDebugMode) {
         print('An error occurred: $e');
       }
@@ -38,26 +40,27 @@ class UserRepository {
     }
   }
 
+  // retrieve user
   Future<User?> retrieveUser({required int id}) async {
     try {
-      EasyLoading.show();
+      EasyLoading.show();   // comment during testing
       var result = await userServiceAPI.fetchAUser(id: id);
 
       if (result.status) {
-        EasyLoading.dismiss();
+        EasyLoading.dismiss();   // comment during testing
         if (kDebugMode) {
           print('User: ${result.user}');
         }
         return result.user;
       } else {
-        toastInfo(msg: 'Error retrieving user', status: Status.error);
+        toastInfo(msg: 'Error retrieving user', status: Status.error);  // comment during testing
         throw Exception('Error retrieving user');
       }
     } catch (e) {
-      EasyLoading.dismiss();
+      EasyLoading.dismiss();  // comment during testing
       toastInfo(
         msg: 'Ops! An error occurred! It\'s either '
-            'the user id is invalid or network glitch',
+            'the user id is invalid or network glitch',    // comment during testing
         status: Status.error,
       );
       if (kDebugMode) {

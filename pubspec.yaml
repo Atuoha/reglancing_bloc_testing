@@ -42,6 +42,8 @@ dependencies:
   dio: ^5.3.3
   flutter_easyloading: ^3.0.5
   cool_alert: ^2.0.1
+  mocktail: ^1.0.1
+  firebase_auth: ^4.14.0
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +63,6 @@ dev_dependencies:
     # package. See that file for information about deactivating specific lint
     # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  mocktail: ^1.0.1
   flutter_driver:
     sdk: flutter
   test: ^1.24.3

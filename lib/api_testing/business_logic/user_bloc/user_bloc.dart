@@ -27,7 +27,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(state.copyWith(status: ProcessingStatus.waiting));
 
     final List<User>? users = await userRepository.retrieveUsers();
-    print('BLOC users: $users');
     try {
       emit(state.copyWith(
         users: users,
