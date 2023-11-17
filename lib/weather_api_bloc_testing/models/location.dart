@@ -4,12 +4,15 @@ class Location extends Equatable {
   final String cityName;
   final String country;
 
-  const Location({required this.cityName, required this.country});
+  const Location({
+    required this.cityName,
+    required this.country,
+  });
 
-  factory Location.initial() => const Location(cityName: "",country: "");
+  factory Location.initial() => const Location(cityName: "", country: "");
 
   @override
-  List<Object?> get props => [cityName,country];
+  List<Object?> get props => [cityName, country];
 
   Location copyWith({
     String? cityName,
@@ -17,14 +20,14 @@ class Location extends Equatable {
   }) {
     return Location(
       cityName: cityName ?? this.cityName,
-      country: country?? this.country
+      country: country ?? this.country,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'cityName': cityName,
-      'country': country
+      'country': country,
     };
   }
 
@@ -35,6 +38,3 @@ class Location extends Equatable {
     );
   }
 }
-
-
-

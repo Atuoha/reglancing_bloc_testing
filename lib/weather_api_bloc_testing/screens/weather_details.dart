@@ -4,6 +4,7 @@ import 'package:re_glance_bloc_testing/weather_api_bloc_testing/business_logic/w
 import 'package:re_glance_bloc_testing/weather_api_bloc_testing/constants/constants.dart';
 
 import '../models/weather.dart';
+import '../widgets/k_cached_image.dart';
 
 class WeatherDetails extends StatelessWidget {
   const WeatherDetails({super.key});
@@ -12,12 +13,15 @@ class WeatherDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final Weather weather = context.read<WeatherBloc>().state.weather;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Weather Details'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-              '${AppConstants.weatherImgURL}/${weather.icon}@2x.png',
+            KCachedImage(
+              image: '${AppConstants.weatherImgURL}/${weather.icon}@2x.png',
             ),
             const SizedBox(height: 10),
             RichText(

@@ -25,12 +25,14 @@ class WeatherRepo {
         return response.weather;
       } else {
         EasyLoading.dismiss();
-        toastInfo(msg: 'Error retrieving weather', status: Status.error);
+        toastInfo(msg: 'Ops! Error retrieving weather', status: Status.error);
         throw Exception('An error occurred');
       }
     } catch (e) {
-      print('error ${e.toString()}');
-      toastInfo(msg: 'Error retrieving weather', status: Status.error);
+      if (kDebugMode) {
+        print('error ${e.toString()}');
+      }
+      toastInfo(msg: 'Ops! Error retrieving weather', status: Status.error);
       EasyLoading.dismiss();
       rethrow;
     }

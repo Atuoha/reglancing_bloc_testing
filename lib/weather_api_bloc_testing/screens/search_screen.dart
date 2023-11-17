@@ -51,7 +51,7 @@ class _WeatherSearchScreenState extends State<WeatherSearchScreen> {
             listener: (context, state) {
               if (state.status == ProcessingStatus.error) {
                 kCoolAlert(
-                  message: 'An error occurred',
+                  message: 'Ops! An error occurred, can\'t fetch weather',
                   context: context,
                   alert: CoolAlertType.error,
                 );
