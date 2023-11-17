@@ -1,39 +1,39 @@
 part of 'weather_bloc.dart';
 
 class WeatherState extends Equatable {
-  final City city;
+  final Location location;
   final Weather weather;
   final ProcessingStatus status;
 
   const WeatherState({
-    required this.city,
+    required this.location,
     required this.weather,
-    required this.status
+    required this.status,
   });
 
   factory WeatherState.initial() => WeatherState(
-        city: City.initial(),
+        location: Location.initial(),
         weather: Weather.initial(),
-    status: ProcessingStatus.initial
+        status: ProcessingStatus.initial,
       );
 
   @override
-  List<Object> get props => [city, weather,status];
+  List<Object> get props => [location, weather, status];
 
   WeatherState copyWith({
-    City? city,
+    Location? location,
     Weather? weather,
     ProcessingStatus? status,
   }) {
     return WeatherState(
-      city: city ?? this.city,
+      location: location ?? this.location,
       weather: weather ?? this.weather,
-      status:status?? this.status,
+      status: status ?? this.status,
     );
   }
 
   @override
   String toString() {
-    return 'WeatherState{cityName: $city, weather: $weather, status: $status}';
+    return 'WeatherState{location: $location, weather: $weather, status: $status}';
   }
 }

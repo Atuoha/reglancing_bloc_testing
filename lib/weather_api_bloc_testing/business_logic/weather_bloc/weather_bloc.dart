@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:re_glance_bloc_testing/api_testing/constants/enum/processing_status.dart';
-
+import '../../constants/enum/processing_status.dart';
 import '../../models/city.dart';
 import '../../models/weather.dart';
 import '../../repository/weather_repo.dart';
@@ -30,21 +29,14 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     emit(state.copyWith(status: ProcessingStatus.waiting));
     final String cityName = event.city;
 
-    try {
-      final response = await weatherRepo.searchCity(cityName: cityName);
-      emit(
-        state.copyWith(
-          city: response,
-          status: ProcessingStatus.success,
+    emit(
+      state.copyWith(
+        location: Location(
+          cityName: cityName,
+          country: '',
         ),
-      );
-    } catch (e) {
-      emit(
-        state.copyWith(
-          status: ProcessingStatus.error,
-        ),
-      );
-    }
+      ),
+    );
   }
 
   // get weather
@@ -53,8 +45,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     Emitter<WeatherState> emit,
   ) async {
     emit(state.copyWith(status: ProcessingStatus.waiting));
-    final String cityName = state.city.cityName;
-
+    final String cityName = state.location.cityName;
+    print('CITY: $cityName');
     try {
       final response = await weatherRepo.fetchWeather(cityName: cityName);
       emit(

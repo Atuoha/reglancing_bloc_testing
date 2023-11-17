@@ -1,20 +1,15 @@
 import 'package:flutter/foundation.dart';
-import '../../api_testing/utils/http_util.dart';
-import '../models/city_response_entity.dart';
+import '../utilities/http_util.dart';
 import '../models/weather_response_entity.dart';
 
 class WeatherAPI {
+  final String weatherAPI = '9a8ae9ea24a956f91cfcf6001fbd623e';
 
-  Future<CityResponseEntity> searchCity({required String cityName}) async {
-    var response = await HttpUtil().get('users');
-    if (kDebugMode) {
-      print(response.toString());
-    }
-    return CityResponseEntity.fromJson(response);
-  }
 
   Future<WeatherResponseEntity> getWeather({required String cityName}) async {
-    var response = await HttpUtil().get('users/$cityName');
+    var response = await HttpUtil().get(
+      '/forecast?q=$cityName&appid=$weatherAPI',
+    );
     if (kDebugMode) {
       print(response.toString());
     }

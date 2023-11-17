@@ -1,32 +1,37 @@
 import 'package:equatable/equatable.dart';
 
-class City extends Equatable {
+class Location extends Equatable {
   final String cityName;
+  final String country;
 
-  const City({required this.cityName});
+  const Location({required this.cityName, required this.country});
 
-  factory City.initial() => const City(cityName: "");
+  factory Location.initial() => const Location(cityName: "",country: "");
 
   @override
-  List<Object?> get props => [cityName];
+  List<Object?> get props => [cityName,country];
 
-  City copyWith({
+  Location copyWith({
     String? cityName,
+    String? country,
   }) {
-    return City(
+    return Location(
       cityName: cityName ?? this.cityName,
+      country: country?? this.country
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'cityName': cityName,
+      'country': country
     };
   }
 
-  factory City.fromJson(Map<String, dynamic> json) {
-    return City(
-      cityName: json['cityName'] as String,
+  factory Location.fromJson(Map<String, dynamic> location) {
+    return Location(
+      cityName: location['name'],
+      country: location['country'],
     );
   }
 }

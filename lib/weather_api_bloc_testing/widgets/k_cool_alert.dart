@@ -10,11 +10,12 @@ Future kCoolAlert({
   confirmBtnText = 'Ok',
 }) {
   return CoolAlert.show(
-      backgroundColor: Colors.grey,
-      confirmBtnColor: Colors.brown,
-      context: context,
-      type: alert,
-      text: message,
-      barrierDismissible: barrierDismissible,
-      confirmBtnText: confirmBtnText);
+    backgroundColor: Colors.grey,
+    confirmBtnColor: Colors.brown,
+    context: context,
+    type: alert,
+    text: message,
+    barrierDismissible: barrierDismissible,
+    confirmBtnText: confirmBtnText,
+  );
 }

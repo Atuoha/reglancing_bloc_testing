@@ -7,6 +7,10 @@ import 'package:re_glance_bloc_testing/api_testing/repository/user_repo.dart';
 import 'package:re_glance_bloc_testing/api_testing/screens/users_list.dart';
 import 'package:re_glance_bloc_testing/business_logic/counter_bloc/counter_bloc.dart';
 import 'package:re_glance_bloc_testing/screens/counter_app.dart';
+import 'package:re_glance_bloc_testing/weather_api_bloc_testing/business_logic/weather_bloc/weather_bloc.dart';
+import 'package:re_glance_bloc_testing/weather_api_bloc_testing/repository/weather_repo.dart';
+import 'package:re_glance_bloc_testing/weather_api_bloc_testing/screens/search_screen.dart';
+import 'package:re_glance_bloc_testing/weather_api_bloc_testing/services/weather_api.dart';
 
 import 'api_testing/screens/user_details.dart';
 
@@ -25,8 +29,15 @@ class MyApp extends StatelessWidget {
       ..animationDuration = const Duration(milliseconds: 50)
       ..loadingStyle = EasyLoadingStyle.light;
 
-    return RepositoryProvider(
-      create: (context) => UserRepository(userServiceAPI: UserServiceAPI()),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => UserRepository(userServiceAPI: UserServiceAPI()),
+        ),
+        RepositoryProvider(
+          create: (context) => WeatherRepo(weatherAPI: WeatherAPI()),
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -35,6 +46,11 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => UserBloc(
               userRepository: context.read<UserRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => WeatherBloc(
+              weatherRepo: context.read<WeatherRepo>(),
             ),
           ),
         ],
@@ -46,7 +62,9 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           // home: const CounterApp(),
-          home: const UsersList(),
+          // home: const UsersList(), // user list api
+          home: const WeatherSearchScreen(),
+          // weather app api
           builder: EasyLoading.init(),
         ),
       ),

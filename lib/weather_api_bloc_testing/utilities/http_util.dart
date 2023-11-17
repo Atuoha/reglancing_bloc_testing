@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:re_glance_bloc_testing/weather_api_bloc_testing/constants/constants.dart';
+import '../constants/constants.dart';
 
 class HttpUtil {
   static final HttpUtil _instance = HttpUtil._internal();
@@ -48,4 +48,7 @@ class HttpUtil {
     );
     return response.data;
   }
+
+
+
 }
