@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../constants/enum/processing_status.dart';
-import '../../models/city.dart';
+import '../../models/location.dart';
 import '../../models/weather.dart';
 import '../../repository/weather_repo.dart';
 

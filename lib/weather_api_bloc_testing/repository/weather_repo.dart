@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:re_glance_bloc_testing/weather_api_bloc_testing/models/weather.dart';
 import 'package:re_glance_bloc_testing/weather_api_bloc_testing/services/weather_api.dart';
-import '../models/city.dart';
+import '../models/location.dart';
 import '../widgets/toast.dart';
 import '../constants/enum/status.dart';
 

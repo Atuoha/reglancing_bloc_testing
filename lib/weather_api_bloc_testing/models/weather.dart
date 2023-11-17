@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'city.dart';
+import 'location.dart';
 
 class Weather extends Equatable {
   final Location location;
