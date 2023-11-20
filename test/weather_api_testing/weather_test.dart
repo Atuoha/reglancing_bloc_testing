@@ -78,5 +78,45 @@ void main() {
         ),
       ],
     );
+
+
+    blocTest(
+      'Testing if weather bloc throws an error if unsuccessful',
+      build: () {
+        when(() => mockWeatherAPI.getWeather(cityName: city)).thenAnswer(
+              (invocation) async => WeatherResponseEntity(
+            weather: Weather.initial(),
+            status: false,
+          ),
+        );
+        return WeatherBloc(weatherRepo: mockWeatherRepository);
+      },
+      seed: () => WeatherState.initial(),
+      act: (bloc) async {
+        bloc
+          ..add(SearchCityEvent(city: city))
+          ..add(GetWeatherEvent());
+        await bloc.stream
+            .firstWhere((state) => state.status == ProcessingStatus.success);
+      },
+      expect: () => [
+        Exception('An error occurred'),
+        // WeatherState(
+        //   location: Location.initial(),
+        //   weather: Weather.initial(),
+        //   status: ProcessingStatus.waiting,
+        // ),
+        // WeatherState(
+        //   location: Location(cityName: city, country: ''),
+        //   weather: Weather.initial(),
+        //   status: ProcessingStatus.waiting,
+        // ),
+        // WeatherState(
+        //   location: Location(cityName: city, country: ''),
+        //   weather: Weather.initial(),
+        //   status: ProcessingStatus.error,
+        // ),
+      ],
+    );
   });
 }
